@@ -6,3 +6,5 @@
 
 ## Update: May 26
 * Added "Item.java" and "ItemBuilder" static class to get clean data from TicketMasterAPI.
+* Added purify method in TicketMasterAPI.java to convert JSONArray to a list of items.
+* Implemented some helper methods to fetch data fields(img URL, address, categories) which are included deeply in TicketMaster response body.
