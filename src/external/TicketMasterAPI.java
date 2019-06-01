@@ -15,8 +15,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import entity.Item;
 import entity.Item.ItemBuilder;
+import entity.TickerMasterObject;
 
 public class TicketMasterAPI {
 	
@@ -24,7 +27,7 @@ public class TicketMasterAPI {
 	private static final String DEFAULT_KEYWORD = ""; // no restriction
 	private static final String API_KEY = "r0zc5wFUQKQteaF62RD0KvCoK8yWk6bw";
 	
-	public JSONArray search(double lat, double lon, String keyword) {
+	public List<Item> search(double lat, double lon, String keyword) {
 		if (keyword == null) {
 			keyword = DEFAULT_KEYWORD;
 		}
@@ -66,9 +69,15 @@ public class TicketMasterAPI {
 			
 			JSONObject object = new JSONObject(response.toString());
 			
+			// convert json to TickerMasterObject. Then build an Item instance from there
 			if (!object.isNull("_embedded")) {
 				JSONObject embedded = object.getJSONObject("_embedded");
-				return getItemList(embedded.getJSONArray("events"));
+				for (int i = 0; i < embedded.getJSONArray("events").length(); ++i) {
+					JSONObject event = embedded.getJSONArray("events").getJSONObject(i);
+				    ObjectMapper objectMapper = new ObjectMapper();
+				    TickerMasterObject obj = objectMapper.readValue(event.toString(), TickerMasterObject.class);
+				}
+
 			}
 		} catch (Exception e) {
 			
@@ -77,6 +86,7 @@ public class TicketMasterAPI {
 		return new ArrayList<>();
 	}
 	
+	// Convert JSONArray to a list of item objects.
 	private List<Item> getItemList(JSONArray events) throws JSONException {
 		List<Item> itemList = new ArrayList<>();
 		for (int i = 0; i < events.length(); ++i) {
@@ -148,6 +158,7 @@ public class TicketMasterAPI {
 		
 	}
 	
+	// fetch imageUrl from event JSONObject
 	private String getImageUrl(JSONObject event) throws JSONException {
 		if (!event.isNull("images")) {
 			JSONArray array = event.getJSONArray("images");
@@ -160,21 +171,10 @@ public class TicketMasterAPI {
 		}
 		return "";
 	}
-
-
-	private void queryAPI(double lat, double lon) {
-		JSONArray events = search(lat, lon, null);
-
-		try {
-		    for (int i = 0; i < events.length(); ++i) {
-		       JSONObject event = events.getJSONObject(i);
-		       System.out.println(event.toString(2));
-		    }
-		} catch (Exception e) {
-	                  e.printStackTrace();
-		}
-	}
 	
+
+	
+	// fetch Categories from event JSONObject
 	private Set<String> getCategories(JSONObject event) throws JSONException {
 			
 			Set<String> categories = new HashSet<>();
@@ -192,8 +192,15 @@ public class TicketMasterAPI {
 			}
 			return categories;
 		}
+	
+	
+	private void queryAPI(double lat, double lon) {
+		List<Item> events = search(lat, lon, null);
 
-
+		for (Item event : events) {
+			System.out.println(event.toJSONObject());
+		}
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
