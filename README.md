@@ -8,3 +8,10 @@
 * Added "Item.java" and "ItemBuilder" static class to get clean data from TicketMasterAPI.
 * Added purify method in TicketMasterAPI.java to convert JSONArray to a list of items.
 * Implemented some helper methods to fetch data fields(img URL, address, categories) which are included deeply in TicketMaster response body.
+
+## May 26 - Aug 1 Update stopped due to school finals and summer class
+
+## Update: Aug 2
+* Supported MySQL database to capture event data from TicketMaster API.
+* Added "MySQLTableCreation" class to automatically reset tables in database(prevent data messed up).
+* Added "MySQLConnection" class to save search results to database.
