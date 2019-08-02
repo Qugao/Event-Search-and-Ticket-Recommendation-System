@@ -72,11 +72,7 @@ public class TicketMasterAPI {
 			// convert json to TickerMasterObject. Then build an Item instance from there
 			if (!object.isNull("_embedded")) {
 				JSONObject embedded = object.getJSONObject("_embedded");
-				for (int i = 0; i < embedded.getJSONArray("events").length(); ++i) {
-					JSONObject event = embedded.getJSONArray("events").getJSONObject(i);
-				    ObjectMapper objectMapper = new ObjectMapper();
-				    TickerMasterObject obj = objectMapper.readValue(event.toString(), TickerMasterObject.class);
-				}
+			    return getItemList(embedded.getJSONArray("events"));
 
 			}
 		} catch (Exception e) {
