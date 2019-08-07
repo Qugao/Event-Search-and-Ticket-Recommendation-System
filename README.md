@@ -15,3 +15,6 @@
 * Supported MySQL database to capture event data from TicketMaster API.
 * Added "MySQLTableCreation" class to automatically reset tables in database(prevent data messed up).
 * Added "MySQLConnection" class to save search results to database.
+
+## Update: Aug 6
+* Implemented "Login" "Logout" servlet to support login and logout functions.
