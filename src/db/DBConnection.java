@@ -89,3 +89,4 @@ public interface DBConnection {
 	 */
 	public boolean verifyLogin(String userId, String password);
 }
+
