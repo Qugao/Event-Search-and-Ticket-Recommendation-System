@@ -1,8 +1,6 @@
 # Event Search and Ticket Recommendation System
-* Created Java servlets with RESTful APIs to handle HTTP requests and responses
-* Built relational and NoSQL databases (MySQL, MongoDB) to capture event data (name, description, location, parking info)      from TicketMaster API
-* Designed algorithms to improve event recommendation based on search history and favorite records) 
-* Deployed server to Amazon EC2 to handle 150 queries per second tested by Apache JMeter. 
+* An interactive web application that help users to search and purchase nearby event tickets with personalized Recommendation Engine.
+* Visted it at http://54.241.139.79/Jupiter/
 
 ## Update: May 26
 * Added "Item.java" and "ItemBuilder" static class to get clean data from TicketMasterAPI.
@@ -18,3 +16,8 @@
 
 ## Update: Aug 6
 * Implemented "Login" "Logout" servlet to support login and logout functions.
+
+## Update: Aug 8 (Finally is completed)
+* Supported content-based user favourite recommendation
+* Supported new user registration function
+* deployed to Amazon EC2 
