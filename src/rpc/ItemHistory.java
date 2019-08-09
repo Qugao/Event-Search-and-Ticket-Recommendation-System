@@ -55,7 +55,7 @@ public class ItemHistory extends HttpServlet {
 			Set<Item> items = conn.getFavoriteItems(userId);
 			for (Item item : items) {
 				JSONObject obj = item.toJSONObject();
-				obj.append("favorite", true);
+				obj.put("favorite", true);
 				array.put(obj);
 			}
 
