@@ -1,7 +1,7 @@
 # Event Search and Ticket Recommendation System
 * An interactive web application that help users to search and purchase nearby event tickets with personalized Recommendation Engine.
 * Visted it at http://54.241.139.79/Jupiter/
-* Test user name: test
+*       Test user name: test
 *       password: 1234
 
 ## Update: May 26
